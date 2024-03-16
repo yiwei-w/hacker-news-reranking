@@ -70,17 +70,18 @@ with col2:
 # Separate the buttons from the display logic for stories
 if submit_clicked:
     # Rerank the stories based on the user's interests
-    top_stories = rerank_stories(top_stories, user_description)
+    with st.spinner('Reranking stories...'):
+        top_stories = rerank_stories(top_stories, user_description)
 
     # Display the (re)ranked stories in a single column
     for i, story in enumerate(top_stories):
         st.write(f"{i+1}. [{story['title']}]({story['hn_url']})")
 
 if refresh_clicked:
-    with st.spinner('Refreshing cache...'):
+    with st.spinner('Refreshing cache & reranking...'):
         top_stories = fetch_top_hn_stories()
-    st.write("Cache refreshed successfully!")
-    top_stories = rerank_stories(top_stories, user_description)
+        # st.write("Cache refreshed successfully!")
+        top_stories = rerank_stories(top_stories, user_description)
 
     # Display the (re)ranked stories in a single column
     for i, story in enumerate(top_stories):
