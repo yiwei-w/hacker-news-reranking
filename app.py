@@ -66,7 +66,7 @@ if top_stories is None:
 col1, col2 = st.columns(2)
 
 with col1:
-    submit_clicked = st.button('Submit')
+    submit_clicked = st.button('Rerank Stories')
 
 with col2:
     refresh_clicked = st.button('Refresh Cache')
